@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taro Tanaka — Software Engineer</title>
+<meta name="description" content="Full-stack engineer in Tokyo. Backend systems, business process automation, and things built from scratch.">
+<style>
+  :root {
+    --ink:    #16191D;
+    --paper:  #FAFAF8;
+    --rule:   #D8D6CF;
+    --muted:  #6B7078;
+    --signal: #2B5F4A;
+
+    --display: Georgia, 'Times New Roman', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    --body: system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    --data: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px 120px;
+  }
+
+  a { color: inherit; }
+
+  /* ---------- language toggle ---------- */
+
+  .lang {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2px;
+    padding: 28px 0 0;
+    font-family: var(--data);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .lang button {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 5px 9px;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+
+  .lang button:hover { color: var(--ink); }
+
+  .lang button[aria-pressed="true"] {
+    color: var(--paper);
+    background: var(--ink);
+  }
+
+  .lang button:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 2px;
+  }
+
+  /* ---------- masthead ---------- */
+
+  header.masthead {
+    padding: 56px 0 44px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
+  }
+
+  .standfirst {
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0 0 26px;
+    max-width: 54ch;
+  }
+
+  .meta {
+    font-family: var(--data);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+  }
+
+  .meta a { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 1px; }
+  .meta a:hover { border-bottom-color: var(--ink); }
+
+  /* ---------- sections ---------- */
+
+  section { padding: 52px 0 0; }
+
+  .eyebrow {
+    font-family: var(--data);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 22px;
+  }
+
+  /* ---------- work entries ---------- */
+
+  .entry {
+    padding: 30px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .entry:first-of-type { border-top: 1px solid var(--rule); }
+
+  h2 {
+    font-family: var(--display);
+    font-size: 23px;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    margin: 0 0 4px;
+  }
+
+  .tagline {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 20px;
+  }
+
+  .entry p.lede {
+    margin: 0 0 22px;
+    max-width: 58ch;
+  }
+
+  /* the signature: a spec sheet of real implementation facts */
+  dl.spec {
+    margin: 0 0 22px;
+    font-family: var(--data);
+    font-size: 12.5px;
+    line-height: 1.6;
+    display: grid;
+    grid-template-columns: 148px 1fr;
+    gap: 0;
+  }
+
+  dl.spec dt {
+    color: var(--muted);
+    padding: 7px 0;
+    border-top: 1px solid var(--rule);
+    letter-spacing: 0.02em;
+  }
+
+  dl.spec dd {
+    margin: 0;
+    padding: 7px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  dl.spec .num { color: var(--signal); }
+
+  .links {
+    font-family: var(--data);
+    font-size: 12px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .links a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  .links a:hover { border-bottom-color: var(--signal); color: var(--signal); }
+
+  /* ---------- skills ---------- */
+
+  dl.stack {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 148px 1fr;
+    font-size: 13.5px;
+  }
+
+  dl.stack dt {
+    font-family: var(--data);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 11px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  dl.stack dd {
+    margin: 0;
+    padding: 11px 0;
+    border-top: 1px solid var(--rule);
+    line-height: 1.65;
+  }
+
+  /* ---------- background ---------- */
+
+  .bg-line {
+    display: grid;
+    grid-template-columns: 148px 1fr;
+    font-size: 14px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .bg-line:last-child { border-bottom: 1px solid var(--rule); }
+
+  .bg-line .year {
+    font-family: var(--data);
+    font-size: 12px;
+    color: var(--muted);
+    padding: 13px 0;
+    letter-spacing: 0.02em;
+  }
+
+  .bg-line .what { padding: 13px 0; line-height: 1.65; }
+
+  /* ---------- contact ---------- */
+
+  .contact {
+    font-family: var(--data);
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .contact a { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px; width: fit-content; }
+  .contact a:hover { border-bottom-color: var(--signal); color: var(--signal); }
+
+  /* ---------- i18n visibility ---------- */
+
+  [data-lang] { display: none; }
+
+  html[data-active="ja"] span[data-lang="ja"],
+  html[data-active="en"] span[data-lang="en"] { display: inline; }
+
+  html[data-active="ja"] div[data-lang="ja"],
+  html[data-active="en"] div[data-lang="en"],
+  html[data-active="ja"] p[data-lang="ja"],
+  html[data-active="en"] p[data-lang="en"] { display: block; }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 620px) {
+    h1 { font-size: 31px; }
+    .wrap { padding: 0 20px 90px; }
+    dl.spec, dl.stack, .bg-line { grid-template-columns: 1fr; }
+    dl.spec dd, dl.stack dd { border-top: none; padding-top: 0; padding-bottom: 9px; }
+    dl.spec dt, dl.stack dt { padding-bottom: 2px; }
+    .bg-line .what { border-top: none; padding-top: 0; }
+    .bg-line .year { padding-bottom: 2px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a, button { transition: color .15s ease, border-color .15s ease, background-color .15s ease; }
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <nav class="lang" aria-label="Language">
+    <button type="button" data-set="ja" aria-pressed="true">JA</button>
+    <button type="button" data-set="en" aria-pressed="false">EN</button>
+  </nav>
+
+  <header class="masthead">
+    <h1><span data-lang="ja">田中 太郎</span><span data-lang="en">Taro Tanaka</span></h1>
+
+    <p class="standfirst lang-block" data-lang="ja">
+      電話と紙とFAXで回っていた業務を、動くシステムに置き換えてきました。通信インフラから人材紹介まで5つの業界で、要件を聞くところから実装まで担当しています。現在は通信キャリアの基幹システムで3名チームのテックリード。
+    </p>
+    <p class="standfirst lang-block" data-lang="en">
+      I replace processes that run on phone calls, paper, and fax with systems that run on their own. Five industries so far, from telecom infrastructure to recruitment — usually from requirements through to production. Currently tech lead for a 3-engineer team on a telecom carrier's core system.
+    </p>
+
+    <div class="meta">
+      <span data-lang="ja">東京</span><span data-lang="en">Tokyo, Japan</span>
+      <a href="https://github.com/haku3782">GitHub</a>
+      <a href="https://www.linkedin.com/in/jadskekj-12345/">LinkedIn</a>
+      <a href="mailto:hogeiewfjk@gmail.com">Email</a>
+    </div>
+  </header>
+
+  <!-- ================= WORK ================= -->
+  <section>
+    <p class="eyebrow"><span data-lang="ja">つくったもの</span><span data-lang="en">Built from scratch</span></p>
+
+    <!-- Poker -->
+    <article class="entry">
+      <h2>Poker Online</h2>
+      <p class="tagline">
+        <span data-lang="ja">リアルタイム対戦テキサスホールデム</span>
+        <span data-lang="en">Real-time multiplayer Texas Hold'em</span>
+      </p>
+
+      <p class="lede lang-block" data-lang="ja">
+        ゲームの状態はすべてサーバーが持っています。手札は持ち主のソケットにだけ送り、他のプレイヤーには同じオブジェクトからそのフィールドを抜いて配信する。クライアントは一切信用しない設計です。役判定とサイドポットの分配は、ルールの例外まで含めて実装しました。
+      </p>
+      <p class="lede lang-block" data-lang="en">
+        The server owns every piece of game state. Hole cards go only to the socket that owns them — everyone else receives the same object with that field removed. Nothing on the client is trusted. Hand evaluation and side-pot distribution are implemented down to the rule exceptions.
+      </p>
+
+      <dl class="spec">
+        <dt><span data-lang="ja">構成</span><span data-lang="en">Stack</span></dt>
+        <dd>Node.js · TypeScript · Express · Socket.IO / React 19 · Vite</dd>
+
+        <dt><span data-lang="ja">役の評価</span><span data-lang="en">Hand evaluation</span></dt>
+        <dd><span class="num">21</span> <span data-lang="ja">通りの5枚組を全評価 ／ <span class="num">9</span> 種の役 ／ ホイールストレート対応</span><span data-lang="en">five-card combinations from 7 cards · <span class="num">9</span> categories · wheel straight</span></dd>
+
+        <dt><span data-lang="ja">サイドポット</span><span data-lang="en">Side pots</span></dt>
+        <dd><span data-lang="ja">累計拠出額で層分割 ／ 端数は席順で決定論的に配分</span><span data-lang="en">partitioned by contribution level · odd chips by seat order</span></dd>
+
+        <dt><span data-lang="ja">例外処理</span><span data-lang="en">Edge cases</span></dt>
+        <dd><span data-lang="ja">レイズ時の行動対象再構築 ／ ヘッズアップのブラインド例外 ／ 切断時の強制フォールド ／ <span class="num">30</span> 秒ターンタイマー</span><span data-lang="en">raise reopening · heads-up blind rule · forfeit on disconnect · <span class="num">30</span>s turn timer</span></dd>
+
+        <dt><span data-lang="ja">テスト</span><span data-lang="en">Tests</span></dt>
+        <dd><span class="num">39</span> unit tests (Vitest) · GitHub Actions</dd>
+      </dl>
+
+      <div class="links">
+        <a href="https://poker-online-three.vercel.app/">Demo</a>
+        <a href="https://github.com/haku3782/poker-online">Source</a>
+      </div>
+    </article>
+
+    <!-- Garden -->
+    <article class="entry">
+      <h2>Garden Care Tracker</h2>
+      <p class="tagline">
+        <span data-lang="ja">家庭菜園の記録と可視化</span>
+        <span data-lang="en">Plant care tracking and visualization</span>
+      </p>
+
+      <p class="lede lang-block" data-lang="ja">
+        認証を通っただけでは足りない、と考えて作りました。すべての操作について、そのリソースが本当にリクエスト元のものかをサービス層で検証しています。アノテーションに任せず明示的に書くことで、認可のルールをHTTPから切り離して単体でテストできる形にしました。
+      </p>
+      <p class="lede lang-block" data-lang="en">
+        Being authenticated isn't enough. Every operation verifies at the service layer that the resource actually belongs to the requester. Writing those checks explicitly, rather than leaving them to annotations, keeps authorization decoupled from HTTP and testable on its own.
+      </p>
+
+      <dl class="spec">
+        <dt><span data-lang="ja">構成</span><span data-lang="en">Stack</span></dt>
+        <dd>Java 21 · Spring Boot · Spring Security · JPA · Flyway / Vue 3 · Pinia</dd>
+
+        <dt><span data-lang="ja">認可</span><span data-lang="en">Authorization</span></dt>
+        <dd><span data-lang="ja">サービス層で所有権を検証 ／ 連鎖する操作は各階層で個別に再検証</span><span data-lang="en">ownership checked at the service layer · re-verified at each level when operations chain</span></dd>
+
+        <dt><span data-lang="ja">スキーマ変更</span><span data-lang="en">Schema evolution</span></dt>
+        <dd><span data-lang="ja">Flywayで版管理 ／ <code>ALTER TYPE … ADD VALUE</code> により本番ENUMを無停止で拡張</span><span data-lang="en">versioned via Flyway · <code>ALTER TYPE … ADD VALUE</code> extends a live Postgres ENUM without a rebuild</span></dd>
+
+        <dt>CI</dt>
+        <dd><span data-lang="ja">実マネージドPostgresに対して実行（インメモリDBは使わない）</span><span data-lang="en">runs against a real managed Postgres — not an in-memory stand-in</span></dd>
+
+        <dt><span data-lang="ja">テスト</span><span data-lang="en">Tests</span></dt>
+        <dd><span data-lang="ja">JUnit 約 <span class="num">800</span> 行 ／ <span class="num">6</span> 言語のi18nを自作composableで実装</span><span data-lang="en">~<span class="num">800</span> lines of JUnit · <span class="num">6</span>-language i18n via a hand-rolled composable</span></dd>
+      </dl>
+
+      <div class="links">
+        <a href="https://garden-app-web-dun.vercel.app/">Demo</a>
+        <a href="https://github.com/haku3782/garden-app">Source</a>
+      </div>
+    </article>
+
+    <!-- Darts -->
+    <article class="entry">
+      <h2>Darts Physics Simulator</h2>
+      <p class="tagline">
+        <span data-lang="ja">セッティングから飛翔軌道を計算する</span>
+        <span data-lang="en">Trajectory simulation from equipment setup</span>
+      </p>
+
+      <p class="lede lang-block" data-lang="ja">
+        迎角に応じて抗力係数が変わるモデルを組んでいます。フライトが生む姿勢復元トルクと角速度の制動を与えて、5ミリ秒刻みで姿勢の時間発展を積分する。飛んでいる最中にノーズダウンしていく挙動まで出ます。何を実装して何を実装していないかは、ドキュメントに明記しました。
+      </p>
+      <p class="lede lang-block" data-lang="en">
+        Effective drag varies with angle of attack. The flight generates a restoring torque, angular velocity is damped, and pitch is integrated forward at a 5 ms step — enough to reproduce the nose-down behavior a dart shows in flight. What the model covers, and what it deliberately doesn't, is documented.
+      </p>
+
+      <dl class="spec">
+        <dt><span data-lang="ja">構成</span><span data-lang="en">Stack</span></dt>
+        <dd>Java 21 · Spring Boot · Docker / React 19 · TypeScript · Three.js</dd>
+
+        <dt><span data-lang="ja">空気力</span><span data-lang="en">Aerodynamics</span></dt>
+        <dd><span data-lang="ja">迎角依存のクロスフロー抗力 ／ フライト形状 <span class="num">5</span> 種の投影面積を反映</span><span data-lang="en">cross-flow drag varying with angle of attack · projected area for <span class="num">5</span> flight shapes</span></dd>
+
+        <dt><span data-lang="ja">姿勢</span><span data-lang="en">Attitude</span></dt>
+        <dd><span data-lang="ja">復元トルクと粘性制動を <span class="num">5</span> ms 刻みで数値積分</span><span data-lang="en">restoring torque and viscous damping integrated at a <span class="num">5</span> ms step</span></dd>
+
+        <dt><span data-lang="ja">セッティング</span><span data-lang="en">Equipment</span></dt>
+        <dd><span data-lang="ja">重心位置とグリップ位置から慣性モーメントと初期角速度を算出</span><span data-lang="en">moment of inertia and release spin derived from CG and grip position</span></dd>
+
+        <dt><span data-lang="ja">対象外</span><span data-lang="en">Out of scope</span></dt>
+        <dd><span data-lang="ja">長軸回転 ／ 横方向ドリフト ／ 風・気温 ／ 剛体変形（意図的に非対応）</span><span data-lang="en">gyroscopic spin · lateral drift · wind and temperature · rigid-body deformation</span></dd>
+      </dl>
+
+      <div class="links">
+        <a href="https://darts-sim-web.vercel.app/">Demo</a>
+        <a href="https://github.com/haku3782/darts-sim">Source</a>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= STACK ================= -->
+  <section>
+    <p class="eyebrow"><span data-lang="ja">使う道具</span><span data-lang="en">Tools</span></p>
+    <dl class="stack">
+      <dt><span data-lang="ja">言語</span><span data-lang="en">Languages</span></dt>
+      <dd>Java · TypeScript · JavaScript · SQL · Shell</dd>
+
+      <dt><span data-lang="ja">バックエンド</span><span data-lang="en">Backend</span></dt>
+      <dd>Spring Boot · Spring Security · JPA · Node.js · Express · Socket.IO</dd>
+
+      <dt><span data-lang="ja">フロントエンド</span><span data-lang="en">Frontend</span></dt>
+      <dd>React · Vue 3 · Three.js · Vite · Pinia</dd>
+
+      <dt><span data-lang="ja">インフラ</span><span data-lang="en">Infrastructure</span></dt>
+      <dd>AWS · Azure · Docker · Linux · PostgreSQL</dd>
+
+      <dt><span data-lang="ja">テスト・CI</span><span data-lang="en">Testing &amp; CI</span></dt>
+      <dd>JUnit · Vitest · Flyway · GitHub Actions · OpenAPI</dd>
+
+      <dt><span data-lang="ja">業務システム</span><span data-lang="en">Business systems</span></dt>
+      <dd>Salesforce · kintone · Node-RED</dd>
+    </dl>
+  </section>
+
+  <!-- ================= BACKGROUND ================= -->
+  <section>
+    <p class="eyebrow"><span data-lang="ja">経歴</span><span data-lang="en">Background</span></p>
+
+    <div class="bg-line">
+      <div class="year">2025 –</div>
+      <div class="what">
+        <span data-lang="ja">通信キャリア基幹システム — テックリード（3名／20チーム・約200名が関わるプロジェクト）</span>
+        <span data-lang="en">Telecom carrier, core system — tech lead of 3, coordinating across 20 teams</span>
+      </div>
+    </div>
+
+    <div class="bg-line">
+      <div class="year">2024 – 2025</div>
+      <div class="what">
+        <span data-lang="ja">ネットワーク運用監視基盤 — クラウド移行と運用自動化</span>
+        <span data-lang="en">Network monitoring platform — cloud migration and operational automation</span>
+      </div>
+    </div>
+
+    <div class="bg-line">
+      <div class="year">2023</div>
+      <div class="what">
+        <span data-lang="ja">人材紹介 — 電話・紙・FAXの受発注をデジタル化（設計から実装まで単独）</span>
+        <span data-lang="en">Recruitment — digitized a phone/paper/fax order workflow, sole engineer</span>
+      </div>
+    </div>
+
+    <div class="bg-line">
+      <div class="year">2021</div>
+      <div class="what">
+        <span data-lang="ja">設備保守 — 全国の店舗向け受発注プラットフォーム構築</span>
+        <span data-lang="en">Facility maintenance — dispatch platform for nationwide retail sites</span>
+      </div>
+    </div>
+
+    <div class="bg-line">
+      <div class="year">2017 – 2019</div>
+      <div class="what">
+        <span data-lang="ja">無線通信インフラ — 運用スクリプトと設定データ処理の自動化</span>
+        <span data-lang="en">Wireless infrastructure — operational scripting and config data processing</span>
+      </div>
+    </div>
+
+    <div class="bg-line">
+      <div class="year">2016</div>
+      <div class="what">
+        <span data-lang="ja">美容専門学校を卒業。その後、独学でエンジニアへ。</span>
+        <span data-lang="en">Graduated from a vocational college in beauty, then taught myself to build software.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section>
+    <p class="eyebrow"><span data-lang="ja">連絡先</span><span data-lang="en">Contact</span></p>
+    <div class="contact">
+      <a href="mailto:hogeiewfjk@gmail.com">hogeiewfjk@gmail.com</a>
+      <a href="https://github.com/haku3782">github.com/haku3782</a>
+      <a href="https://www.linkedin.com/in/jadskekj-12345/">linkedin.com/in/jadskekj-12345</a>
+    </div>
+    <p style="font-family:var(--data); font-size:12px; color:var(--muted); margin-top:20px;">
+      <span data-lang="ja">日本語 ネイティブ ／ 한국어 비즈니스 레벨 ／ English — technical reading</span>
+      <span data-lang="en">Japanese — native / Korean — business level / English — technical reading</span>
+    </p>
+  </section>
+
+</div>
+
+<script>
+  (function () {
+    var html = document.documentElement;
+    var buttons = document.querySelectorAll('.lang button');
+
+    function setLang(lang) {
+      html.setAttribute('data-active', lang);
+      html.setAttribute('lang', lang);
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.set === lang));
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.dataset.set); });
+    });
+
+    var saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    setLang(saved || (navigator.language && navigator.language.startsWith('ja') ? 'ja' : 'en'));
+  })();
+</script>
+</body>
+</html>
