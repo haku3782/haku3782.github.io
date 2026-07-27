@@ -335,13 +335,13 @@
       </p>
 
       <p class="lede lang-block" data-lang="ja">
-        複数のブラウザが同じゲーム状態をリアルタイムで共有しながら、手札だけは各プレイヤーに見えない。WebSocketの特性を踏まえてサーバー側で配信内容を変えることで実現しています。役判定・サイドポット・ベッティングラウンドの例外処理はルールの隅まで実装しました。
+        ブラウザ上で複数人がリアルタイムで対戦できるポーカーを、ゲームロジックまで含めてフルスクラッチで実装しました。
       </p>
       <p class="lede lang-block" data-lang="ko">
-        여러 브라우저가 동일한 게임 상태를 실시간으로 공유하면서, 패만은 해당 플레이어에게만 보입니다. 클라이언트에는 아무것도 숨기지 않고, 서버 측에서 각 WebSocket 페이로드를 변경하여 전송합니다. 패 판정·사이드 팟·배팅 라운드 예외 처리는 규칙의 끝까지 구현했습니다.
+        브라우저에서 여러 명이 실시간으로 대전할 수 있는 포커를, 게임 로직까지 포함하여 처음부터 구현했습니다.
       </p>
       <p class="lede lang-block" data-lang="en">
-        Multiple browsers share the same game state in real time, while each player's hole cards stay invisible to everyone else. Rather than relying on the client to hide anything, the server tailors each WebSocket payload before sending. Hand evaluation, side-pot distribution, and betting-round edge cases are implemented down to the rule exceptions.
+        A multiplayer Texas Hold'em built from scratch — real-time sync across browsers, game logic included.
       </p>
 
       <dl class="spec">
@@ -371,19 +371,19 @@
     <article class="entry">
       <h2>Garden Care Tracker</h2>
       <p class="tagline">
-        <span data-lang="ja">家庭菜園の記録と可視化</span>
-        <span data-lang="ko">가정 텃밭 기록과 시각화</span>
-        <span data-lang="en">Plant care tracking and visualization</span>
+        <span data-lang="ja">水やりの記録と習慣トラッキング</span>
+        <span data-lang="ko">물주기 기록과 습관 트래킹</span>
+        <span data-lang="en">Care logging and habit tracking for your garden</span>
       </p>
 
       <p class="lede lang-block" data-lang="ja">
-        バックエンドの設計に力を入れた作品です。認可はサービス層でリソースの所有権を検証し、レスポンスはDTOを経由させて内部フィールドを隠し、ファイルはサーバー経由でプロキシしてストレージの秘密鍵をクライアントに渡さない。
+        認可・レスポンス形式・ファイル管理——バックエンドの各層に設計の判断を積んだ作品です。
       </p>
       <p class="lede lang-block" data-lang="ko">
-        백엔드 설계에 공을 들인 작품입니다. 인가는 서비스 레이어에서 리소스 소유권을 검증하고, 응답은 DTO를 경유시켜 내부 필드를 숨기며, 파일은 서버 경유로 프록시하여 스토리지 시크릿 키를 클라이언트에 전달하지 않습니다.
+        인가·응답 형식·파일 관리——백엔드의 각 레이어에 설계 판단을 쌓은 작품입니다.
       </p>
       <p class="lede lang-block" data-lang="en">
-        The focus of this project is backend design. Authorization is verified at the service layer against resource ownership; responses go through DTOs so internal fields can never leak; file uploads are proxied through the server so the storage secret never reaches the client.
+        Authorization, response design, file handling — a project built around deliberate design decisions at every backend layer.
       </p>
 
       <dl class="spec">
@@ -400,7 +400,7 @@
         <dd><span data-lang="ja">サーバーサイドでMIME型・5MB上限を検証し、バックエンド経由でSupabase Storageにプロキシ — ストレージの秘密鍵はクライアントに渡さない</span><span data-lang="ko">서버 측에서 MIME 타입·5MB 상한을 검증하고, 백엔드 경유로 Supabase Storage에 프록시 — 스토리지 시크릿 키는 클라이언트에 전달하지 않음</span><span data-lang="en">MIME type and 5 MB limit validated server-side; uploaded to Supabase Storage through the backend — storage secret never exposed to the client</span></dd>
 
         <dt><span data-lang="ja">スキーマ変更</span><span data-lang="ko">스키마 변경</span><span data-lang="en">Schema evolution</span></dt>
-        <dd><span data-lang="ja">Flywayで版管理 ／ <code>ALTER TYPE … ADD VALUE</code> により本番ENUMを無停止で拡張</span><span data-lang="ko">Flyway로 버전 관리 ／ <code>ALTER TYPE … ADD VALUE</code>로 프로덕션 ENUM을 무중단으로 확장</span><span data-lang="en">versioned via Flyway · <code>ALTER TYPE … ADD VALUE</code> extends a live Postgres ENUM without a rebuild</span></dd>
+        <dd><span data-lang="ja">Flywayで版管理 ／ 本番のDBを止めずに構造変更</span><span data-lang="ko">Flyway로 버전 관리 ／ 프로덕션 DB를 중단하지 않고 구조 변경</span><span data-lang="en">versioned via Flyway · schema change applied to a live database without downtime</span></dd>
 
         <dt>CI</dt>
         <dd><span data-lang="ja">実マネージドPostgresに対して実行（インメモリDBは使わない）</span><span data-lang="ko">실제 관리형 Postgres에서 실행 (인메모리 DB 미사용)</span><span data-lang="en">runs against a real managed Postgres — not an in-memory stand-in</span></dd>
@@ -422,19 +422,19 @@
     <article class="entry">
       <h2>Darts Physics Simulator</h2>
       <p class="tagline">
-        <span data-lang="ja">セッティングから飛翔軌道を計算する</span>
-        <span data-lang="ko">세팅으로부터 비행 궤도를 계산하는</span>
-        <span data-lang="en">Trajectory simulation from equipment setup</span>
+        <span data-lang="ja">セッティング別のダーツ飛翔を3Dで確かめる</span>
+        <span data-lang="ko">세팅별 다트 비행을 3D로 확인하는</span>
+        <span data-lang="en">See how your dart setup changes the flight path in 3D</span>
       </p>
 
       <p class="lede lang-block" data-lang="ja">
-        物理エンジンで計算した軌道をThree.jsで3D再生する構成です。バックエンドがPOSTひとつで全軌道をバッチ返却し、フロントエンドがその配列をそのまま描画する。物理モデルは迎角依存の抗力と姿勢ダイナミクスを実装し、対象外の範囲もドキュメントに明記しました。
+        ダーツの飛び方を物理的に計算し、その軌道を3Dで再生するシミュレータです。
       </p>
       <p class="lede lang-block" data-lang="ko">
-        물리 엔진으로 계산한 궤도를 Three.js로 3D 재생하는 구성입니다. 백엔드가 POST 한 번으로 전체 궤도를 배치 반환하고, 프론트엔드가 그 배열을 그대로 렌더링합니다. 물리 모델은 받음각 의존 항력과 자세 다이나믹스를 구현하고, 대상 외 범위도 문서에 명기했습니다.
+        다트의 비행을 물리적으로 계산하고, 그 궤도를 3D로 재생하는 시뮬레이터입니다.
       </p>
       <p class="lede lang-block" data-lang="en">
-        The backend computes the full trajectory and returns it in a single POST response; the frontend hands the array directly to Three.js for 3D playback. The physics model implements angle-of-attack-dependent drag and pitch attitude dynamics, and everything left out of scope is documented explicitly.
+        A simulator that computes dart flight paths with a physics model and plays them back in 3D.
       </p>
 
       <dl class="spec">
@@ -451,7 +451,7 @@
         <dd><span data-lang="ja">重心位置とグリップ位置から慣性モーメントと初期角速度を算出</span><span data-lang="ko">무게중심 위치와 그립 위치에서 관성 모멘트와 초기 각속도를 산출</span><span data-lang="en">moment of inertia and release spin derived from CG and grip position</span></dd>
 
         <dt><span data-lang="ja">計算モデル</span><span data-lang="ko">계산 모델</span><span data-lang="en">Computation</span></dt>
-        <dd><span data-lang="ja">POST 一回で軌道全点をバッチ返却 — クライアントはJSON配列を受け取って 3D レンダラーに渡す</span><span data-lang="ko">POST 한 번으로 궤도 전점을 배치 반환 — 클라이언트는 JSON 배열을 받아 3D 렌더러에 전달</span><span data-lang="en">single POST returns the full trajectory synchronously — client receives a JSON array and hands it to the 3D renderer</span></dd>
+        <dd><span data-lang="ja">バックエンドが軌道を計算してまとめて返し、フロントエンドがそのまま3D描画する</span><span data-lang="ko">백엔드가 궤도를 계산하여 한 번에 반환하고, 프론트엔드가 그대로 3D 렌더링한다</span><span data-lang="en">the backend computes the full trajectory and returns it at once; the frontend renders it directly in 3D</span></dd>
 
         <dt><span data-lang="ja">対象外</span><span data-lang="ko">대상 외</span><span data-lang="en">Out of scope</span></dt>
         <dd><span data-lang="ja">長軸回転 ／ 横方向ドリフト ／ 風・気温 ／ 剛体変形（意図的に非対応）</span><span data-lang="ko">장축 회전 ／ 횡방향 드리프트 ／ 바람·기온 ／ 강체 변형 (의도적으로 미구현)</span><span data-lang="en">gyroscopic spin · lateral drift · wind and temperature · rigid-body deformation</span></dd>
