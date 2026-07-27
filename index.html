@@ -317,10 +317,10 @@
       </p>
 
       <p class="lede lang-block" data-lang="ja">
-        ゲームの状態はすべてサーバーが持っています。手札は持ち主のソケットにだけ送り、他のプレイヤーには同じオブジェクトからそのフィールドを抜いて配信する。クライアントは一切信用しない設計です。役判定とサイドポットの分配は、ルールの例外まで含めて実装しました。
+        複数のブラウザが同じゲーム状態をリアルタイムで共有しながら、手札だけは各プレイヤーに見えない。WebSocketの特性を踏まえてサーバー側で配信内容を変えることで実現しています。役判定・サイドポット・ベッティングラウンドの例外処理はルールの隅まで実装しました。
       </p>
       <p class="lede lang-block" data-lang="en">
-        The server owns every piece of game state. Hole cards go only to the socket that owns them — everyone else receives the same object with that field removed. Nothing on the client is trusted. Hand evaluation and side-pot distribution are implemented down to the rule exceptions.
+        Multiple browsers share the same game state in real time, while each player's hole cards stay invisible to everyone else. Rather than relying on the client to hide anything, the server tailors each WebSocket payload before sending. Hand evaluation, side-pot distribution, and betting-round edge cases are implemented down to the rule exceptions.
       </p>
 
       <dl class="spec">
@@ -355,10 +355,10 @@
       </p>
 
       <p class="lede lang-block" data-lang="ja">
-        認証を通っただけでは足りない、と考えて作りました。すべての操作について、そのリソースが本当にリクエスト元のものかをサービス層で検証しています。アノテーションに任せず明示的に書くことで、認可のルールをHTTPから切り離して単体でテストできる形にしました。
+        バックエンドの設計に力を入れた作品です。認可はサービス層でリソースの所有権を検証し、レスポンスはDTOを経由させて内部フィールドを隠し、ファイルはサーバー経由でプロキシしてストレージの秘密鍵をクライアントに渡さない。
       </p>
       <p class="lede lang-block" data-lang="en">
-        Being authenticated isn't enough. Every operation verifies at the service layer that the resource actually belongs to the requester. Writing those checks explicitly, rather than leaving them to annotations, keeps authorization decoupled from HTTP and testable on its own.
+        The focus of this project is backend design. Authorization is verified at the service layer against resource ownership; responses go through DTOs so internal fields can never leak; file uploads are proxied through the server so the storage secret never reaches the client.
       </p>
 
       <dl class="spec">
@@ -402,10 +402,10 @@
       </p>
 
       <p class="lede lang-block" data-lang="ja">
-        迎角に応じて抗力係数が変わるモデルを組んでいます。フライトが生む姿勢復元トルクと角速度の制動を与えて、5ミリ秒刻みで姿勢の時間発展を積分する。飛んでいる最中にノーズダウンしていく挙動まで出ます。何を実装して何を実装していないかは、ドキュメントに明記しました。
+        物理エンジンで計算した軌道をThree.jsで3D再生する構成です。バックエンドがPOSTひとつで全軌道をバッチ返却し、フロントエンドがその配列をそのまま描画する。物理モデルは迎角依存の抗力と姿勢ダイナミクスを実装し、対象外の範囲もドキュメントに明記しました。
       </p>
       <p class="lede lang-block" data-lang="en">
-        Effective drag varies with angle of attack. The flight generates a restoring torque, angular velocity is damped, and pitch is integrated forward at a 5 ms step — enough to reproduce the nose-down behavior a dart shows in flight. What the model covers, and what it deliberately doesn't, is documented.
+        The backend computes the full trajectory and returns it in a single POST response; the frontend hands the array directly to Three.js for 3D playback. The physics model implements angle-of-attack-dependent drag and pitch attitude dynamics, and everything left out of scope is documented explicitly.
       </p>
 
       <dl class="spec">
