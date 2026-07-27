@@ -14,8 +14,8 @@
     --signal: #2B5F4A;
 
     --display: Georgia, 'Times New Roman', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-    --body: system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic', sans-serif;
-    --data: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Hiragino Sans', 'Yu Gothic', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    --data: ui-monospace, 'Cascadia Code', 'Consolas', SFMono-Regular, 'SF Mono', Menlo, monospace;
   }
 
   * { box-sizing: border-box; }
@@ -260,12 +260,25 @@
   [data-lang] { display: none; }
 
   html[data-active="ja"] span[data-lang="ja"],
-  html[data-active="en"] span[data-lang="en"] { display: inline; }
+  html[data-active="en"] span[data-lang="en"],
+  html[data-active="ko"] span[data-lang="ko"] { display: inline; }
 
   html[data-active="ja"] div[data-lang="ja"],
   html[data-active="en"] div[data-lang="en"],
+  html[data-active="ko"] div[data-lang="ko"],
   html[data-active="ja"] p[data-lang="ja"],
-  html[data-active="en"] p[data-lang="en"] { display: block; }
+  html[data-active="en"] p[data-lang="en"],
+  html[data-active="ko"] p[data-lang="ko"] { display: block; }
+
+  /* ---------- Korean font override ---------- */
+
+  html[data-active="ko"] dl.spec,
+  html[data-active="ko"] dl.stack,
+  html[data-active="ko"] dl.stack dt,
+  html[data-active="ko"] .eyebrow,
+  html[data-active="ko"] .bg-line .year,
+  html[data-active="ko"] .links,
+  html[data-active="ko"] .lang { font-family: var(--body); letter-spacing: 0.04em; }
 
   /* ---------- responsive ---------- */
 
@@ -290,14 +303,18 @@
 
   <nav class="lang" aria-label="Language">
     <button type="button" data-set="ja" aria-pressed="true">JA</button>
+    <button type="button" data-set="ko" aria-pressed="false">KO</button>
     <button type="button" data-set="en" aria-pressed="false">EN</button>
   </nav>
 
   <header class="masthead">
-    <h1><span data-lang="ja">田中 太郎</span><span data-lang="en">Taro Tanaka</span></h1>
+    <h1><span data-lang="ja">田中 太郎</span><span data-lang="ko">다나카 타로</span><span data-lang="en">Taro Tanaka</span></h1>
 
     <p class="standfirst lang-block" data-lang="ja">
       東京在住。独学でエンジニアへ転身し、通信・ネットワーク運用・人材紹介など5つの業界で業務システムの設計から実装を担当してきました。未経験の領域でも短期間で立ち上がり、要件定義から本番デプロイまで自走するスタイルで実績を積んできました。現在は通信キャリアの基幹システムで3名チームのテックリード。
+    </p>
+    <p class="standfirst lang-block" data-lang="ko">
+      도쿄 거주. 독학으로 엔지니어로 전직하여, 통신·네트워크 운용·인재 소개 등 5개 업종에서 업무 시스템의 설계부터 구현까지 담당해 왔습니다. 미경험 분야에서도 단기간에 업무를 파악하고, 요건 정의부터 프로덕션 배포까지 자립적으로 추진해 왔습니다. 현재는 통신 캐리어 핵심 시스템에서 3인 팀의 테크 리드.
     </p>
     <p class="standfirst lang-block" data-lang="en">
       Tokyo-based engineer. Self-taught from scratch, I've spent 6+ years building internal systems across five industries — telecom, network operations, recruitment, and more. I ramp up quickly in unfamiliar domains and own delivery from requirements through production. Currently tech lead for a 3-engineer team on a carrier's core system.
@@ -306,37 +323,41 @@
 
   <!-- ================= WORK ================= -->
   <section>
-    <p class="eyebrow"><span data-lang="ja">作品</span><span data-lang="en">Built from scratch</span></p>
+    <p class="eyebrow"><span data-lang="ja">作品</span><span data-lang="ko">작품</span><span data-lang="en">Built from scratch</span></p>
 
     <!-- Poker -->
     <article class="entry">
       <h2>Poker Online</h2>
       <p class="tagline">
         <span data-lang="ja">リアルタイム対戦テキサスホールデム</span>
+        <span data-lang="ko">리얼타임 대전 텍사스 홀덤</span>
         <span data-lang="en">Real-time multiplayer Texas Hold'em</span>
       </p>
 
       <p class="lede lang-block" data-lang="ja">
         複数のブラウザが同じゲーム状態をリアルタイムで共有しながら、手札だけは各プレイヤーに見えない。WebSocketの特性を踏まえてサーバー側で配信内容を変えることで実現しています。役判定・サイドポット・ベッティングラウンドの例外処理はルールの隅まで実装しました。
       </p>
+      <p class="lede lang-block" data-lang="ko">
+        여러 브라우저가 동일한 게임 상태를 실시간으로 공유하면서, 패만은 해당 플레이어에게만 보입니다. 클라이언트에는 아무것도 숨기지 않고, 서버 측에서 각 WebSocket 페이로드를 변경하여 전송합니다. 패 판정·사이드 팟·배팅 라운드 예외 처리는 규칙의 끝까지 구현했습니다.
+      </p>
       <p class="lede lang-block" data-lang="en">
         Multiple browsers share the same game state in real time, while each player's hole cards stay invisible to everyone else. Rather than relying on the client to hide anything, the server tailors each WebSocket payload before sending. Hand evaluation, side-pot distribution, and betting-round edge cases are implemented down to the rule exceptions.
       </p>
 
       <dl class="spec">
-        <dt><span data-lang="ja">構成</span><span data-lang="en">Stack</span></dt>
+        <dt><span data-lang="ja">構成</span><span data-lang="ko">구성</span><span data-lang="en">Stack</span></dt>
         <dd>Node.js · TypeScript · Express · Socket.IO / React 19 · Vite</dd>
 
-        <dt><span data-lang="ja">役の評価</span><span data-lang="en">Hand evaluation</span></dt>
-        <dd><span class="num">21</span> <span data-lang="ja">通りの5枚組を全評価 ／ <span class="num">9</span> 種の役 ／ ホイールストレート対応</span><span data-lang="en">five-card combinations from 7 cards · <span class="num">9</span> categories · wheel straight</span></dd>
+        <dt><span data-lang="ja">役の評価</span><span data-lang="ko">패 평가</span><span data-lang="en">Hand evaluation</span></dt>
+        <dd><span class="num">21</span> <span data-lang="ja">通りの5枚組を全評価 ／ <span class="num">9</span> 種の役 ／ ホイールストレート対応</span><span data-lang="ko">가지 5장 조합 전체 평가 ／ <span class="num">9</span>종 패 ／ 휠 스트레이트 대응</span><span data-lang="en">five-card combinations from 7 cards · <span class="num">9</span> categories · wheel straight</span></dd>
 
-        <dt><span data-lang="ja">サイドポット</span><span data-lang="en">Side pots</span></dt>
-        <dd><span data-lang="ja">累計拠出額で層分割 ／ 端数は席順で決定論的に配分</span><span data-lang="en">partitioned by contribution level · odd chips by seat order</span></dd>
+        <dt><span data-lang="ja">サイドポット</span><span data-lang="ko">사이드 팟</span><span data-lang="en">Side pots</span></dt>
+        <dd><span data-lang="ja">累計拠出額で層分割 ／ 端数は席順で決定論的に配分</span><span data-lang="ko">누적 기여액으로 층 분할 ／ 나머지 칩은 자리 순서로 결정론적 배분</span><span data-lang="en">partitioned by contribution level · odd chips by seat order</span></dd>
 
-        <dt><span data-lang="ja">例外処理</span><span data-lang="en">Edge cases</span></dt>
-        <dd><span data-lang="ja">レイズ時の行動対象再構築 ／ ヘッズアップのブラインド例外 ／ オートランアウト ／ 切断時の強制フォールド ／ <span class="num">30</span> 秒ターンタイマー</span><span data-lang="en">raise reopening · heads-up blind rule · auto-run-out · forfeit on disconnect · <span class="num">30</span>s turn timer</span></dd>
+        <dt><span data-lang="ja">例外処理</span><span data-lang="ko">예외 처리</span><span data-lang="en">Edge cases</span></dt>
+        <dd><span data-lang="ja">レイズ時の行動対象再構築 ／ ヘッズアップのブラインド例外 ／ オートランアウト ／ 切断時の強制フォールド ／ <span class="num">30</span> 秒ターンタイマー</span><span data-lang="ko">레이즈 시 행동 대상 재구성 ／ 헤즈업 블라인드 예외 ／ 오토런아웃 ／ 연결 끊김 시 강제 폴드 ／ <span class="num">30</span>초 턴 타이머</span><span data-lang="en">raise reopening · heads-up blind rule · auto-run-out · forfeit on disconnect · <span class="num">30</span>s turn timer</span></dd>
 
-        <dt><span data-lang="ja">テスト</span><span data-lang="en">Tests</span></dt>
+        <dt><span data-lang="ja">テスト</span><span data-lang="ko">테스트</span><span data-lang="en">Tests</span></dt>
         <dd><span class="num">39</span> unit tests (Vitest) · GitHub Actions</dd>
       </dl>
 
@@ -351,40 +372,44 @@
       <h2>Garden Care Tracker</h2>
       <p class="tagline">
         <span data-lang="ja">家庭菜園の記録と可視化</span>
+        <span data-lang="ko">가정 텃밭 기록과 시각화</span>
         <span data-lang="en">Plant care tracking and visualization</span>
       </p>
 
       <p class="lede lang-block" data-lang="ja">
         バックエンドの設計に力を入れた作品です。認可はサービス層でリソースの所有権を検証し、レスポンスはDTOを経由させて内部フィールドを隠し、ファイルはサーバー経由でプロキシしてストレージの秘密鍵をクライアントに渡さない。
       </p>
+      <p class="lede lang-block" data-lang="ko">
+        백엔드 설계에 공을 들인 작품입니다. 인가는 서비스 레이어에서 리소스 소유권을 검증하고, 응답은 DTO를 경유시켜 내부 필드를 숨기며, 파일은 서버 경유로 프록시하여 스토리지 시크릿 키를 클라이언트에 전달하지 않습니다.
+      </p>
       <p class="lede lang-block" data-lang="en">
         The focus of this project is backend design. Authorization is verified at the service layer against resource ownership; responses go through DTOs so internal fields can never leak; file uploads are proxied through the server so the storage secret never reaches the client.
       </p>
 
       <dl class="spec">
-        <dt><span data-lang="ja">構成</span><span data-lang="en">Stack</span></dt>
+        <dt><span data-lang="ja">構成</span><span data-lang="ko">구성</span><span data-lang="en">Stack</span></dt>
         <dd>Java 21 · Spring Boot · Spring Security · JPA · Flyway / Vue 3 · Pinia</dd>
 
-        <dt><span data-lang="ja">認可</span><span data-lang="en">Authorization</span></dt>
-        <dd><span data-lang="ja">サービス層で所有権を検証 ／ 連鎖する操作は各階層で個別に再検証</span><span data-lang="en">ownership checked at the service layer · re-verified at each level when operations chain</span></dd>
+        <dt><span data-lang="ja">認可</span><span data-lang="ko">인가</span><span data-lang="en">Authorization</span></dt>
+        <dd><span data-lang="ja">サービス層で所有権を検証 ／ 連鎖する操作は各階層で個別に再検証</span><span data-lang="ko">서비스 레이어에서 소유권 검증 ／ 연쇄 작업은 각 레이어에서 개별 재검증</span><span data-lang="en">ownership checked at the service layer · re-verified at each level when operations chain</span></dd>
 
-        <dt><span data-lang="ja">DTO境界</span><span data-lang="en">DTO boundary</span></dt>
-        <dd><span data-lang="ja">エンティティをコントローラーから直接返さず必ずDTOにマッピング — パスワードハッシュ等が誤ってAPIから漏れない構造</span><span data-lang="en">entities are never returned directly from controllers — internal fields such as password hashes cannot leak through the API by accident</span></dd>
+        <dt><span data-lang="ja">DTO境界</span><span data-lang="ko">DTO 경계</span><span data-lang="en">DTO boundary</span></dt>
+        <dd><span data-lang="ja">エンティティをコントローラーから直接返さず必ずDTOにマッピング — パスワードハッシュ等が誤ってAPIから漏れない構造</span><span data-lang="ko">엔티티를 컨트롤러에서 직접 반환하지 않고 반드시 DTO로 매핑 — 패스워드 해시 등이 실수로 API에서 누출되지 않는 구조</span><span data-lang="en">entities are never returned directly from controllers — internal fields such as password hashes cannot leak through the API by accident</span></dd>
 
-        <dt><span data-lang="ja">ファイルアップロード</span><span data-lang="en">File upload</span></dt>
-        <dd><span data-lang="ja">サーバーサイドでMIME型・5MB上限を検証し、バックエンド経由でSupabase Storageにプロキシ — ストレージの秘密鍵はクライアントに渡さない</span><span data-lang="en">MIME type and 5 MB limit validated server-side; uploaded to Supabase Storage through the backend — storage secret never exposed to the client</span></dd>
+        <dt><span data-lang="ja">ファイルアップロード</span><span data-lang="ko">파일 업로드</span><span data-lang="en">File upload</span></dt>
+        <dd><span data-lang="ja">サーバーサイドでMIME型・5MB上限を検証し、バックエンド経由でSupabase Storageにプロキシ — ストレージの秘密鍵はクライアントに渡さない</span><span data-lang="ko">서버 측에서 MIME 타입·5MB 상한을 검증하고, 백엔드 경유로 Supabase Storage에 프록시 — 스토리지 시크릿 키는 클라이언트에 전달하지 않음</span><span data-lang="en">MIME type and 5 MB limit validated server-side; uploaded to Supabase Storage through the backend — storage secret never exposed to the client</span></dd>
 
-        <dt><span data-lang="ja">スキーマ変更</span><span data-lang="en">Schema evolution</span></dt>
-        <dd><span data-lang="ja">Flywayで版管理 ／ <code>ALTER TYPE … ADD VALUE</code> により本番ENUMを無停止で拡張</span><span data-lang="en">versioned via Flyway · <code>ALTER TYPE … ADD VALUE</code> extends a live Postgres ENUM without a rebuild</span></dd>
+        <dt><span data-lang="ja">スキーマ変更</span><span data-lang="ko">스키마 변경</span><span data-lang="en">Schema evolution</span></dt>
+        <dd><span data-lang="ja">Flywayで版管理 ／ <code>ALTER TYPE … ADD VALUE</code> により本番ENUMを無停止で拡張</span><span data-lang="ko">Flyway로 버전 관리 ／ <code>ALTER TYPE … ADD VALUE</code>로 프로덕션 ENUM을 무중단으로 확장</span><span data-lang="en">versioned via Flyway · <code>ALTER TYPE … ADD VALUE</code> extends a live Postgres ENUM without a rebuild</span></dd>
 
         <dt>CI</dt>
-        <dd><span data-lang="ja">実マネージドPostgresに対して実行（インメモリDBは使わない）</span><span data-lang="en">runs against a real managed Postgres — not an in-memory stand-in</span></dd>
+        <dd><span data-lang="ja">実マネージドPostgresに対して実行（インメモリDBは使わない）</span><span data-lang="ko">실제 관리형 Postgres에서 실행 (인메모리 DB 미사용)</span><span data-lang="en">runs against a real managed Postgres — not an in-memory stand-in</span></dd>
 
-        <dt><span data-lang="ja">テスト</span><span data-lang="en">Tests</span></dt>
+        <dt><span data-lang="ja">テスト</span><span data-lang="ko">테스트</span><span data-lang="en">Tests</span></dt>
         <dd>JUnit ~<span class="num">800</span> lines · GitHub Actions</dd>
 
         <dt>i18n</dt>
-        <dd><span data-lang="ja"><span class="num">6</span> 言語対応 ／ 外部ライブラリなし ／ 自作 Vue composable として実装</span><span data-lang="en"><span class="num">6</span> languages · hand-rolled Vue composable, no i18n library</span></dd>
+        <dd><span data-lang="ja"><span class="num">6</span> 言語対応 ／ 外部ライブラリなし ／ 自作 Vue composable として実装</span><span data-lang="ko"><span class="num">6</span>개 언어 대응 ／ 외부 라이브러리 없음 ／ 자체 제작 Vue composable로 구현</span><span data-lang="en"><span class="num">6</span> languages · hand-rolled Vue composable, no i18n library</span></dd>
       </dl>
 
       <div class="links">
@@ -398,34 +423,38 @@
       <h2>Darts Physics Simulator</h2>
       <p class="tagline">
         <span data-lang="ja">セッティングから飛翔軌道を計算する</span>
+        <span data-lang="ko">세팅으로부터 비행 궤도를 계산하는</span>
         <span data-lang="en">Trajectory simulation from equipment setup</span>
       </p>
 
       <p class="lede lang-block" data-lang="ja">
         物理エンジンで計算した軌道をThree.jsで3D再生する構成です。バックエンドがPOSTひとつで全軌道をバッチ返却し、フロントエンドがその配列をそのまま描画する。物理モデルは迎角依存の抗力と姿勢ダイナミクスを実装し、対象外の範囲もドキュメントに明記しました。
       </p>
+      <p class="lede lang-block" data-lang="ko">
+        물리 엔진으로 계산한 궤도를 Three.js로 3D 재생하는 구성입니다. 백엔드가 POST 한 번으로 전체 궤도를 배치 반환하고, 프론트엔드가 그 배열을 그대로 렌더링합니다. 물리 모델은 받음각 의존 항력과 자세 다이나믹스를 구현하고, 대상 외 범위도 문서에 명기했습니다.
+      </p>
       <p class="lede lang-block" data-lang="en">
         The backend computes the full trajectory and returns it in a single POST response; the frontend hands the array directly to Three.js for 3D playback. The physics model implements angle-of-attack-dependent drag and pitch attitude dynamics, and everything left out of scope is documented explicitly.
       </p>
 
       <dl class="spec">
-        <dt><span data-lang="ja">構成</span><span data-lang="en">Stack</span></dt>
+        <dt><span data-lang="ja">構成</span><span data-lang="ko">구성</span><span data-lang="en">Stack</span></dt>
         <dd>Java 21 · Spring Boot · Docker / React 19 · TypeScript · Three.js</dd>
 
-        <dt><span data-lang="ja">空気力</span><span data-lang="en">Aerodynamics</span></dt>
-        <dd><span data-lang="ja">迎角依存のクロスフロー抗力 ／ フライト形状 <span class="num">5</span> 種の投影面積を反映</span><span data-lang="en">cross-flow drag varying with angle of attack · projected area for <span class="num">5</span> flight shapes</span></dd>
+        <dt><span data-lang="ja">空気力</span><span data-lang="ko">공기력</span><span data-lang="en">Aerodynamics</span></dt>
+        <dd><span data-lang="ja">迎角依存のクロスフロー抗力 ／ フライト形状 <span class="num">5</span> 種の投影面積を反映</span><span data-lang="ko">받음각 의존 크로스플로우 항력 ／ 비행 형상 <span class="num">5</span>종의 투영 면적 반영</span><span data-lang="en">cross-flow drag varying with angle of attack · projected area for <span class="num">5</span> flight shapes</span></dd>
 
-        <dt><span data-lang="ja">姿勢</span><span data-lang="en">Attitude</span></dt>
-        <dd><span data-lang="ja">復元トルクと粘性制動を <span class="num">5</span> ms 刻みで数値積分</span><span data-lang="en">restoring torque and viscous damping integrated at a <span class="num">5</span> ms step</span></dd>
+        <dt><span data-lang="ja">姿勢</span><span data-lang="ko">자세</span><span data-lang="en">Attitude</span></dt>
+        <dd><span data-lang="ja">復元トルクと粘性制動を <span class="num">5</span> ms 刻みで数値積分</span><span data-lang="ko">복원 토크와 점성 감쇠를 <span class="num">5</span>ms 간격으로 수치 적분</span><span data-lang="en">restoring torque and viscous damping integrated at a <span class="num">5</span> ms step</span></dd>
 
-        <dt><span data-lang="ja">セッティング</span><span data-lang="en">Equipment</span></dt>
-        <dd><span data-lang="ja">重心位置とグリップ位置から慣性モーメントと初期角速度を算出</span><span data-lang="en">moment of inertia and release spin derived from CG and grip position</span></dd>
+        <dt><span data-lang="ja">セッティング</span><span data-lang="ko">세팅</span><span data-lang="en">Equipment</span></dt>
+        <dd><span data-lang="ja">重心位置とグリップ位置から慣性モーメントと初期角速度を算出</span><span data-lang="ko">무게중심 위치와 그립 위치에서 관성 모멘트와 초기 각속도를 산출</span><span data-lang="en">moment of inertia and release spin derived from CG and grip position</span></dd>
 
-        <dt><span data-lang="ja">計算モデル</span><span data-lang="en">Computation</span></dt>
-        <dd><span data-lang="ja">POST 一回で軌道全点をバッチ返却 — クライアントはJSON配列を受け取って 3D レンダラーに渡す</span><span data-lang="en">single POST returns the full trajectory synchronously — client receives a JSON array and hands it to the 3D renderer</span></dd>
+        <dt><span data-lang="ja">計算モデル</span><span data-lang="ko">계산 모델</span><span data-lang="en">Computation</span></dt>
+        <dd><span data-lang="ja">POST 一回で軌道全点をバッチ返却 — クライアントはJSON配列を受け取って 3D レンダラーに渡す</span><span data-lang="ko">POST 한 번으로 궤도 전점을 배치 반환 — 클라이언트는 JSON 배열을 받아 3D 렌더러에 전달</span><span data-lang="en">single POST returns the full trajectory synchronously — client receives a JSON array and hands it to the 3D renderer</span></dd>
 
-        <dt><span data-lang="ja">対象外</span><span data-lang="en">Out of scope</span></dt>
-        <dd><span data-lang="ja">長軸回転 ／ 横方向ドリフト ／ 風・気温 ／ 剛体変形（意図的に非対応）</span><span data-lang="en">gyroscopic spin · lateral drift · wind and temperature · rigid-body deformation</span></dd>
+        <dt><span data-lang="ja">対象外</span><span data-lang="ko">대상 외</span><span data-lang="en">Out of scope</span></dt>
+        <dd><span data-lang="ja">長軸回転 ／ 横方向ドリフト ／ 風・気温 ／ 剛体変形（意図的に非対応）</span><span data-lang="ko">장축 회전 ／ 횡방향 드리프트 ／ 바람·기온 ／ 강체 변형 (의도적으로 미구현)</span><span data-lang="en">gyroscopic spin · lateral drift · wind and temperature · rigid-body deformation</span></dd>
       </dl>
 
       <div class="links">
@@ -437,24 +466,24 @@
 
   <!-- ================= STACK ================= -->
   <section>
-    <p class="eyebrow"><span data-lang="ja">技術スタック</span><span data-lang="en">Tools</span></p>
+    <p class="eyebrow"><span data-lang="ja">技術スタック</span><span data-lang="ko">기술 스택</span><span data-lang="en">Tools</span></p>
     <dl class="stack">
-      <dt><span data-lang="ja">言語</span><span data-lang="en">Languages</span></dt>
+      <dt><span data-lang="ja">言語</span><span data-lang="ko">언어</span><span data-lang="en">Languages</span></dt>
       <dd>Java · TypeScript · JavaScript · SQL · Shell · HTML/CSS</dd>
 
-      <dt><span data-lang="ja">バックエンド</span><span data-lang="en">Backend</span></dt>
+      <dt><span data-lang="ja">バックエンド</span><span data-lang="ko">백엔드</span><span data-lang="en">Backend</span></dt>
       <dd>Spring Boot · Spring Security · JPA · Node.js · Express · Socket.IO</dd>
 
-      <dt><span data-lang="ja">フロントエンド</span><span data-lang="en">Frontend</span></dt>
+      <dt><span data-lang="ja">フロントエンド</span><span data-lang="ko">프론트엔드</span><span data-lang="en">Frontend</span></dt>
       <dd>React · Vue 3 · Three.js · Vite · Pinia</dd>
 
-      <dt><span data-lang="ja">インフラ</span><span data-lang="en">Infrastructure</span></dt>
+      <dt><span data-lang="ja">インフラ</span><span data-lang="ko">인프라</span><span data-lang="en">Infrastructure</span></dt>
       <dd>AWS · Azure · Docker · Linux · PostgreSQL · Render · Vercel · Supabase</dd>
 
-      <dt><span data-lang="ja">テスト・CI</span><span data-lang="en">Testing &amp; CI</span></dt>
+      <dt><span data-lang="ja">テスト・CI</span><span data-lang="ko">테스트·CI</span><span data-lang="en">Testing &amp; CI</span></dt>
       <dd>JUnit · Vitest · Flyway · GitHub Actions · OpenAPI</dd>
 
-      <dt><span data-lang="ja">業務システム</span><span data-lang="en">Business systems</span></dt>
+      <dt><span data-lang="ja">業務システム</span><span data-lang="ko">업무 시스템</span><span data-lang="en">Business systems</span></dt>
       <dd>Salesforce · kintone · Node-RED</dd>
 
     </dl>
@@ -462,25 +491,26 @@
 
   <!-- ================= LANGUAGES ================= -->
   <section>
-    <p class="eyebrow"><span data-lang="ja">語学</span><span data-lang="en">Spoken Languages</span></p>
+    <p class="eyebrow"><span data-lang="ja">語学</span><span data-lang="ko">언어 능력</span><span data-lang="en">Spoken Languages</span></p>
     <dl class="stack">
-      <dt><span data-lang="ja">日本語</span><span data-lang="en">Japanese</span></dt>
-      <dd><span data-lang="ja">ネイティブ</span><span data-lang="en">Native</span></dd>
-      <dt><span data-lang="ja">韓国語</span><span data-lang="en">Korean</span></dt>
-      <dd><span data-lang="ja">ビジネスレベル（在日コリアン学校にて12年）</span><span data-lang="en">Business level (12 years at a Korean school in Japan)</span></dd>
-      <dt><span data-lang="ja">英語</span><span data-lang="en">English</span></dt>
-      <dd><span data-lang="ja">技術文書読解（英検2級）</span><span data-lang="en">Technical reading · EIKEN Grade 2</span></dd>
+      <dt><span data-lang="ja">日本語</span><span data-lang="ko">일본어</span><span data-lang="en">Japanese</span></dt>
+      <dd><span data-lang="ja">ネイティブ</span><span data-lang="ko">네이티브</span><span data-lang="en">Native</span></dd>
+      <dt><span data-lang="ja">韓国語</span><span data-lang="ko">한국어</span><span data-lang="en">Korean</span></dt>
+      <dd><span data-lang="ja">ビジネスレベル（在日コリアン学校にて12年）</span><span data-lang="ko">비즈니스 레벨 (재일 코리안 학교에서 12년)</span><span data-lang="en">Business level (12 years at a Korean school in Japan)</span></dd>
+      <dt><span data-lang="ja">英語</span><span data-lang="ko">영어</span><span data-lang="en">English</span></dt>
+      <dd><span data-lang="ja">技術文書読解（英検2級）</span><span data-lang="ko">기술 문서 독해 · EIKEN 2급</span><span data-lang="en">Technical reading · EIKEN Grade 2</span></dd>
     </dl>
   </section>
 
   <!-- ================= BACKGROUND ================= -->
   <section>
-    <p class="eyebrow"><span data-lang="ja">経歴</span><span data-lang="en">Background</span></p>
+    <p class="eyebrow"><span data-lang="ja">経歴</span><span data-lang="ko">경력</span><span data-lang="en">Background</span></p>
 
     <div class="bg-line">
       <div class="year">2025 –</div>
       <div class="what">
         <span data-lang="ja">通信キャリア基幹システム — テックリード（3名／20チーム・約200名が関わるプロジェクト）</span>
+        <span data-lang="ko">통신 캐리어 핵심 시스템 — 테크 리드 3인 / 20팀 간 조정</span>
         <span data-lang="en">Telecom carrier, core system — tech lead of 3, coordinating across 20 teams</span>
       </div>
     </div>
@@ -489,6 +519,7 @@
       <div class="year">2024 – 2025</div>
       <div class="what">
         <span data-lang="ja">ネットワーク運用監視基盤 — クラウド移行と運用自動化</span>
+        <span data-lang="ko">네트워크 운용 모니터링 기반 — 클라우드 마이그레이션과 운용 자동화</span>
         <span data-lang="en">Network monitoring platform — cloud migration and operational automation</span>
       </div>
     </div>
@@ -497,6 +528,7 @@
       <div class="year">2023</div>
       <div class="what">
         <span data-lang="ja">人材紹介 — 電話・紙・FAXの受発注をデジタル化（設計から実装まで単独）</span>
+        <span data-lang="ko">인재 소개 — 전화·종이·FAX 수발주를 디지털화 (설계부터 구현까지 단독)</span>
         <span data-lang="en">Recruitment — digitized a phone/paper/fax order workflow, sole engineer</span>
       </div>
     </div>
@@ -505,6 +537,7 @@
       <div class="year">2021</div>
       <div class="what">
         <span data-lang="ja">設備保守 — 全国の店舗向け受発注プラットフォーム構築</span>
+        <span data-lang="ko">설비 보수 — 전국 점포용 수발주 플랫폼 구축</span>
         <span data-lang="en">Facility maintenance — dispatch platform for nationwide retail sites</span>
       </div>
     </div>
@@ -513,6 +546,7 @@
       <div class="year">2017 – 2019</div>
       <div class="what">
         <span data-lang="ja">無線通信インフラ — 運用スクリプトと設定データ処理の自動化</span>
+        <span data-lang="ko">무선 통신 인프라 — 운용 스크립트와 설정 데이터 처리 자동화</span>
         <span data-lang="en">Wireless infrastructure — operational scripting and config data processing</span>
       </div>
     </div>
@@ -521,6 +555,7 @@
       <div class="year">2016</div>
       <div class="what">
         <span data-lang="ja">美容専門学校を卒業。その後、独学でエンジニアへ。</span>
+        <span data-lang="ko">미용 전문학교 졸업. 이후 독학으로 엔지니어로.</span>
         <span data-lang="en">Graduated from a vocational college in beauty, then taught myself to build software.</span>
       </div>
     </div>
@@ -528,7 +563,7 @@
 
   <!-- ================= CONTACT ================= -->
   <section>
-    <p class="eyebrow"><span data-lang="ja">連絡先</span><span data-lang="en">Contact</span></p>
+    <p class="eyebrow"><span data-lang="ja">連絡先</span><span data-lang="ko">연락처</span><span data-lang="en">Contact</span></p>
     <dl class="spec">
       <dt>Email</dt>
       <dd><a href="mailto:hogeiewfjk@gmail.com">hogeiewfjk@gmail.com</a></dd>
@@ -561,7 +596,12 @@
 
     var saved = null;
     try { saved = localStorage.getItem('lang'); } catch (e) {}
-    setLang(saved || (navigator.language && navigator.language.startsWith('ja') ? 'ja' : 'en'));
+    var detected = 'en';
+    if (navigator.language) {
+      if (navigator.language.startsWith('ja')) detected = 'ja';
+      else if (navigator.language.startsWith('ko')) detected = 'ko';
+    }
+    setLang(saved || detected);
   })();
 </script>
 </body>
