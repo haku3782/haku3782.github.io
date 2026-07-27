@@ -297,10 +297,10 @@
     <h1><span data-lang="ja">田中 太郎</span><span data-lang="en">Taro Tanaka</span></h1>
 
     <p class="standfirst lang-block" data-lang="ja">
-      東京在住。電話と紙とFAXで回っていた業務を、動くシステムに置き換えてきました。通信インフラから人材紹介まで5つの業界で、要件を聞くところから実装まで担当しています。現在は通信キャリアの基幹システムで3名チームのテックリード。
+      東京在住。独学でエンジニアへ転身し、通信・ネットワーク運用・人材紹介など5つの業界で業務システムの設計から実装を担当してきました。未経験の領域でも短期間で立ち上がり、要件定義から本番デプロイまで自走するスタイルで実績を積んできました。現在は通信キャリアの基幹システムで3名チームのテックリード。
     </p>
     <p class="standfirst lang-block" data-lang="en">
-      Tokyo-based engineer. I replace processes that run on phone calls, paper, and fax with systems that run on their own. Five industries so far, from telecom infrastructure to recruitment — usually from requirements through to production. Currently tech lead for a 3-engineer team on a telecom carrier's core system.
+      Tokyo-based engineer. Self-taught from scratch, I've spent 6+ years building internal systems across five industries — telecom, network operations, recruitment, and more. I ramp up quickly in unfamiliar domains and own delivery from requirements through production. Currently tech lead for a 3-engineer team on a carrier's core system.
     </p>
   </header>
 
@@ -334,7 +334,7 @@
         <dd><span data-lang="ja">累計拠出額で層分割 ／ 端数は席順で決定論的に配分</span><span data-lang="en">partitioned by contribution level · odd chips by seat order</span></dd>
 
         <dt><span data-lang="ja">例外処理</span><span data-lang="en">Edge cases</span></dt>
-        <dd><span data-lang="ja">レイズ時の行動対象再構築 ／ ヘッズアップのブラインド例外 ／ 切断時の強制フォールド ／ <span class="num">30</span> 秒ターンタイマー</span><span data-lang="en">raise reopening · heads-up blind rule · forfeit on disconnect · <span class="num">30</span>s turn timer</span></dd>
+        <dd><span data-lang="ja">レイズ時の行動対象再構築 ／ ヘッズアップのブラインド例外 ／ オートランアウト ／ 切断時の強制フォールド ／ <span class="num">30</span> 秒ターンタイマー</span><span data-lang="en">raise reopening · heads-up blind rule · auto-run-out · forfeit on disconnect · <span class="num">30</span>s turn timer</span></dd>
 
         <dt><span data-lang="ja">テスト</span><span data-lang="en">Tests</span></dt>
         <dd><span class="num">39</span> unit tests (Vitest) · GitHub Actions</dd>
@@ -368,6 +368,12 @@
         <dt><span data-lang="ja">認可</span><span data-lang="en">Authorization</span></dt>
         <dd><span data-lang="ja">サービス層で所有権を検証 ／ 連鎖する操作は各階層で個別に再検証</span><span data-lang="en">ownership checked at the service layer · re-verified at each level when operations chain</span></dd>
 
+        <dt><span data-lang="ja">DTO境界</span><span data-lang="en">DTO boundary</span></dt>
+        <dd><span data-lang="ja">エンティティをコントローラーから直接返さず必ずDTOにマッピング — パスワードハッシュ等が誤ってAPIから漏れない構造</span><span data-lang="en">entities are never returned directly from controllers — internal fields such as password hashes cannot leak through the API by accident</span></dd>
+
+        <dt><span data-lang="ja">ファイルアップロード</span><span data-lang="en">File upload</span></dt>
+        <dd><span data-lang="ja">サーバーサイドでMIME型・5MB上限を検証し、バックエンド経由でSupabase Storageにプロキシ — ストレージの秘密鍵はクライアントに渡さない</span><span data-lang="en">MIME type and 5 MB limit validated server-side; uploaded to Supabase Storage through the backend — storage secret never exposed to the client</span></dd>
+
         <dt><span data-lang="ja">スキーマ変更</span><span data-lang="en">Schema evolution</span></dt>
         <dd><span data-lang="ja">Flywayで版管理 ／ <code>ALTER TYPE … ADD VALUE</code> により本番ENUMを無停止で拡張</span><span data-lang="en">versioned via Flyway · <code>ALTER TYPE … ADD VALUE</code> extends a live Postgres ENUM without a rebuild</span></dd>
 
@@ -375,7 +381,10 @@
         <dd><span data-lang="ja">実マネージドPostgresに対して実行（インメモリDBは使わない）</span><span data-lang="en">runs against a real managed Postgres — not an in-memory stand-in</span></dd>
 
         <dt><span data-lang="ja">テスト</span><span data-lang="en">Tests</span></dt>
-        <dd><span data-lang="ja">JUnit 約 <span class="num">800</span> 行 ／ <span class="num">6</span> 言語のi18nを自作composableで実装</span><span data-lang="en">~<span class="num">800</span> lines of JUnit · <span class="num">6</span>-language i18n via a hand-rolled composable</span></dd>
+        <dd>JUnit ~<span class="num">800</span> lines · GitHub Actions</dd>
+
+        <dt>i18n</dt>
+        <dd><span data-lang="ja"><span class="num">6</span> 言語対応 ／ 外部ライブラリなし ／ 自作 Vue composable として実装</span><span data-lang="en"><span class="num">6</span> languages · hand-rolled Vue composable, no i18n library</span></dd>
       </dl>
 
       <div class="links">
@@ -412,6 +421,9 @@
         <dt><span data-lang="ja">セッティング</span><span data-lang="en">Equipment</span></dt>
         <dd><span data-lang="ja">重心位置とグリップ位置から慣性モーメントと初期角速度を算出</span><span data-lang="en">moment of inertia and release spin derived from CG and grip position</span></dd>
 
+        <dt><span data-lang="ja">計算モデル</span><span data-lang="en">Computation</span></dt>
+        <dd><span data-lang="ja">POST 一回で軌道全点をバッチ返却 — クライアントはJSON配列を受け取って 3D レンダラーに渡す</span><span data-lang="en">single POST returns the full trajectory synchronously — client receives a JSON array and hands it to the 3D renderer</span></dd>
+
         <dt><span data-lang="ja">対象外</span><span data-lang="en">Out of scope</span></dt>
         <dd><span data-lang="ja">長軸回転 ／ 横方向ドリフト ／ 風・気温 ／ 剛体変形（意図的に非対応）</span><span data-lang="en">gyroscopic spin · lateral drift · wind and temperature · rigid-body deformation</span></dd>
       </dl>
@@ -428,7 +440,7 @@
     <p class="eyebrow"><span data-lang="ja">技術スタック</span><span data-lang="en">Tools</span></p>
     <dl class="stack">
       <dt><span data-lang="ja">言語</span><span data-lang="en">Languages</span></dt>
-      <dd>Java · TypeScript · JavaScript · SQL · Shell</dd>
+      <dd>Java · TypeScript · JavaScript · SQL · Shell · HTML/CSS</dd>
 
       <dt><span data-lang="ja">バックエンド</span><span data-lang="en">Backend</span></dt>
       <dd>Spring Boot · Spring Security · JPA · Node.js · Express · Socket.IO</dd>
@@ -437,7 +449,7 @@
       <dd>React · Vue 3 · Three.js · Vite · Pinia</dd>
 
       <dt><span data-lang="ja">インフラ</span><span data-lang="en">Infrastructure</span></dt>
-      <dd>AWS · Azure · Docker · Linux · PostgreSQL</dd>
+      <dd>AWS · Azure · Docker · Linux · PostgreSQL · Render · Vercel · Supabase</dd>
 
       <dt><span data-lang="ja">テスト・CI</span><span data-lang="en">Testing &amp; CI</span></dt>
       <dd>JUnit · Vitest · Flyway · GitHub Actions · OpenAPI</dd>
@@ -455,9 +467,9 @@
       <dt><span data-lang="ja">日本語</span><span data-lang="en">Japanese</span></dt>
       <dd><span data-lang="ja">ネイティブ</span><span data-lang="en">Native</span></dd>
       <dt><span data-lang="ja">韓国語</span><span data-lang="en">Korean</span></dt>
-      <dd><span data-lang="ja">ビジネスレベル</span><span data-lang="en">Business level</span></dd>
+      <dd><span data-lang="ja">ビジネスレベル（在日コリアン学校にて12年）</span><span data-lang="en">Business level (12 years at a Korean school in Japan)</span></dd>
       <dt><span data-lang="ja">英語</span><span data-lang="en">English</span></dt>
-      <dd><span data-lang="ja">技術文書読解</span><span data-lang="en">Technical reading</span></dd>
+      <dd><span data-lang="ja">技術文書読解（英検2級）</span><span data-lang="en">Technical reading · EIKEN Grade 2</span></dd>
     </dl>
   </section>
 
