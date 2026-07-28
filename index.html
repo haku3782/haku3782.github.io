@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Taro Tanaka — Software Engineer</title>
 <meta name="description" content="Full-stack engineer in Tokyo. Backend systems, business process automation, and things built from scratch.">
+<script>
+  (function(){
+    var s=null;
+    try{s=localStorage.getItem('lang');}catch(e){}
+    var d='en';
+    if(!s&&navigator.language){
+      if(navigator.language.startsWith('ja'))d='ja';
+      else if(navigator.language.startsWith('ko'))d='ko';
+    }
+    document.documentElement.setAttribute('data-active',s||d);
+  })();
+</script>
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,9 +24,9 @@
 <div class="wrap">
 
   <nav class="lang" aria-label="Language">
+    <button type="button" data-set="en" aria-pressed="false">EN</button>
     <button type="button" data-set="ja" aria-pressed="true">JA</button>
     <button type="button" data-set="ko" aria-pressed="false">KO</button>
-    <button type="button" data-set="en" aria-pressed="false">EN</button>
   </nav>
 
   <header class="masthead">
@@ -206,9 +218,9 @@
       <dt><span data-lang="ja">日本語</span><span data-lang="ko">일본어</span><span data-lang="en">Japanese</span></dt>
       <dd><span data-lang="ja">ネイティブ</span><span data-lang="ko">네이티브</span><span data-lang="en">Native</span></dd>
       <dt><span data-lang="ja">韓国語</span><span data-lang="ko">한국어</span><span data-lang="en">Korean</span></dt>
-      <dd><span data-lang="ja">ビジネスレベル（在日コリアン学校にて12年）</span><span data-lang="ko">비즈니스 레벨 (재일 코리안 학교에서 12년)</span><span data-lang="en">Business level (12 years at a Korean school in Japan)</span></dd>
+      <dd><span data-lang="ja">ビジネスレベル</span><span data-lang="ko">비즈니스 레벨</span><span data-lang="en">Business level</span></dd>
       <dt><span data-lang="ja">英語</span><span data-lang="ko">영어</span><span data-lang="en">English</span></dt>
-      <dd><span data-lang="ja">技術文書読解（英検2級）</span><span data-lang="ko">기술 문서 독해 · EIKEN 2급</span><span data-lang="en">Technical reading · EIKEN Grade 2</span></dd>
+      <dd><span data-lang="ja">技術文書読解</span><span data-lang="ko">기술 문서 독해</span><span data-lang="en">Technical reading</span></dd>
     </dl>
   </section>
 
