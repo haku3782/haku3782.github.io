@@ -8,7 +8,11 @@
   --display: Georgia, 'Times New Roman', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
   --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Hiragino Sans', 'Yu Gothic', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   --data: ui-monospace, 'Cascadia Code', 'Consolas', SFMono-Regular, 'SF Mono', Menlo, monospace;
+
+  --col: 148px 1fr;
 }
+
+/* ---------- base ---------- */
 
 * { box-sizing: border-box; }
 
@@ -32,6 +36,17 @@ body {
 
 a { color: inherit; }
 
+/* ---------- monospace elements ---------- */
+
+.lang,
+.eyebrow,
+dl.spec,
+dl.stack dt,
+.links,
+.bg-line .year {
+  font-family: var(--data);
+}
+
 /* ---------- language toggle ---------- */
 
 .lang {
@@ -39,7 +54,6 @@ a { color: inherit; }
   justify-content: flex-end;
   gap: 2px;
   padding: 28px 0 0;
-  font-family: var(--data);
   font-size: 11px;
   letter-spacing: 0.08em;
 }
@@ -90,25 +104,11 @@ h1 {
   max-width: 54ch;
 }
 
-.meta {
-  font-family: var(--data);
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: 0.02em;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
-}
-
-.meta a { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 1px; }
-.meta a:hover { border-bottom-color: var(--ink); }
-
 /* ---------- sections ---------- */
 
 section { padding: 52px 0 0; }
 
 .eyebrow {
-  font-family: var(--data);
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -144,15 +144,12 @@ h2 {
   max-width: 58ch;
 }
 
-/* the signature: a spec sheet of real implementation facts */
 dl.spec {
   margin: 0 0 22px;
-  font-family: var(--data);
   font-size: 12.5px;
   line-height: 1.6;
   display: grid;
-  grid-template-columns: 148px 1fr;
-  gap: 0;
+  grid-template-columns: var(--col);
 }
 
 dl.spec dt {
@@ -171,7 +168,6 @@ dl.spec dd {
 dl.spec .num { color: var(--signal); }
 
 .links {
-  font-family: var(--data);
   font-size: 12px;
   display: flex;
   gap: 18px;
@@ -192,12 +188,11 @@ dl.spec .num { color: var(--signal); }
 dl.stack {
   margin: 0;
   display: grid;
-  grid-template-columns: 148px 1fr;
+  grid-template-columns: var(--col);
   font-size: 13.5px;
 }
 
 dl.stack dt {
-  font-family: var(--data);
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -217,7 +212,7 @@ dl.stack dd {
 
 .bg-line {
   display: grid;
-  grid-template-columns: 148px 1fr;
+  grid-template-columns: var(--col);
   font-size: 14px;
   border-top: 1px solid var(--rule);
 }
@@ -225,7 +220,6 @@ dl.stack dd {
 .bg-line:last-child { border-bottom: 1px solid var(--rule); }
 
 .bg-line .year {
-  font-family: var(--data);
   font-size: 12px;
   color: var(--muted);
   padding: 13px 0;
@@ -233,19 +227,6 @@ dl.stack dd {
 }
 
 .bg-line .what { padding: 13px 0; line-height: 1.65; }
-
-/* ---------- contact ---------- */
-
-.contact {
-  font-family: var(--data);
-  font-size: 13px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
-
-.contact a { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px; width: fit-content; }
-.contact a:hover { border-bottom-color: var(--signal); color: var(--signal); }
 
 /* ---------- i18n visibility ---------- */
 
@@ -255,9 +236,6 @@ html[data-active="ja"] span[data-lang="ja"],
 html[data-active="en"] span[data-lang="en"],
 html[data-active="ko"] span[data-lang="ko"] { display: inline; }
 
-html[data-active="ja"] div[data-lang="ja"],
-html[data-active="en"] div[data-lang="en"],
-html[data-active="ko"] div[data-lang="ko"],
 html[data-active="ja"] p[data-lang="ja"],
 html[data-active="en"] p[data-lang="en"],
 html[data-active="ko"] p[data-lang="ko"] { display: block; }
@@ -265,7 +243,6 @@ html[data-active="ko"] p[data-lang="ko"] { display: block; }
 /* ---------- Korean font override ---------- */
 
 html[data-active="ko"] dl.spec,
-html[data-active="ko"] dl.stack,
 html[data-active="ko"] dl.stack dt,
 html[data-active="ko"] .eyebrow,
 html[data-active="ko"] .bg-line .year,
