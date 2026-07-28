@@ -1,0 +1,289 @@
+:root {
+  --ink:    #16191D;
+  --paper:  #FAFAF8;
+  --rule:   #D8D6CF;
+  --muted:  #6B7078;
+  --signal: #2B5F4A;
+
+  --display: Georgia, 'Times New Roman', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Hiragino Sans', 'Yu Gothic', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --data: ui-monospace, 'Cascadia Code', 'Consolas', SFMono-Regular, 'SF Mono', Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 28px 120px;
+}
+
+a { color: inherit; }
+
+/* ---------- language toggle ---------- */
+
+.lang {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: 28px 0 0;
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.lang button {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 5px 9px;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.lang button:hover { color: var(--ink); }
+
+.lang button[aria-pressed="true"] {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.lang button:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+/* ---------- masthead ---------- */
+
+header.masthead {
+  padding: 56px 0 44px;
+  border-bottom: 1px solid var(--rule);
+}
+
+h1 {
+  font-family: var(--display);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 18px;
+}
+
+.standfirst {
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 0 26px;
+  max-width: 54ch;
+}
+
+.meta {
+  font-family: var(--data);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+.meta a { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 1px; }
+.meta a:hover { border-bottom-color: var(--ink); }
+
+/* ---------- sections ---------- */
+
+section { padding: 52px 0 0; }
+
+.eyebrow {
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+
+/* ---------- work entries ---------- */
+
+.entry {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.entry:first-of-type { border-top: 1px solid var(--rule); }
+
+h2 {
+  font-family: var(--display);
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  margin: 0 0 4px;
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+
+.entry p.lede {
+  margin: 0 0 22px;
+  max-width: 58ch;
+}
+
+/* the signature: a spec sheet of real implementation facts */
+dl.spec {
+  margin: 0 0 22px;
+  font-family: var(--data);
+  font-size: 12.5px;
+  line-height: 1.6;
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  gap: 0;
+}
+
+dl.spec dt {
+  color: var(--muted);
+  padding: 7px 0;
+  border-top: 1px solid var(--rule);
+  letter-spacing: 0.02em;
+}
+
+dl.spec dd {
+  margin: 0;
+  padding: 7px 0;
+  border-top: 1px solid var(--rule);
+}
+
+dl.spec .num { color: var(--signal); }
+
+.links {
+  font-family: var(--data);
+  font-size: 12px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.links a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  letter-spacing: 0.02em;
+}
+
+.links a:hover { border-bottom-color: var(--signal); color: var(--signal); }
+
+/* ---------- skills ---------- */
+
+dl.stack {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  font-size: 13.5px;
+}
+
+dl.stack dt {
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 11px 0;
+  border-top: 1px solid var(--rule);
+}
+
+dl.stack dd {
+  margin: 0;
+  padding: 11px 0;
+  border-top: 1px solid var(--rule);
+  line-height: 1.65;
+}
+
+/* ---------- background ---------- */
+
+.bg-line {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  font-size: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.bg-line:last-child { border-bottom: 1px solid var(--rule); }
+
+.bg-line .year {
+  font-family: var(--data);
+  font-size: 12px;
+  color: var(--muted);
+  padding: 13px 0;
+  letter-spacing: 0.02em;
+}
+
+.bg-line .what { padding: 13px 0; line-height: 1.65; }
+
+/* ---------- contact ---------- */
+
+.contact {
+  font-family: var(--data);
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.contact a { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px; width: fit-content; }
+.contact a:hover { border-bottom-color: var(--signal); color: var(--signal); }
+
+/* ---------- i18n visibility ---------- */
+
+[data-lang] { display: none; }
+
+html[data-active="ja"] span[data-lang="ja"],
+html[data-active="en"] span[data-lang="en"],
+html[data-active="ko"] span[data-lang="ko"] { display: inline; }
+
+html[data-active="ja"] div[data-lang="ja"],
+html[data-active="en"] div[data-lang="en"],
+html[data-active="ko"] div[data-lang="ko"],
+html[data-active="ja"] p[data-lang="ja"],
+html[data-active="en"] p[data-lang="en"],
+html[data-active="ko"] p[data-lang="ko"] { display: block; }
+
+/* ---------- Korean font override ---------- */
+
+html[data-active="ko"] dl.spec,
+html[data-active="ko"] dl.stack,
+html[data-active="ko"] dl.stack dt,
+html[data-active="ko"] .eyebrow,
+html[data-active="ko"] .bg-line .year,
+html[data-active="ko"] .links,
+html[data-active="ko"] .lang { font-family: var(--body); letter-spacing: 0.04em; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 620px) {
+  h1 { font-size: 31px; }
+  .wrap { padding: 0 20px 90px; }
+  dl.spec, dl.stack, .bg-line { grid-template-columns: 1fr; }
+  dl.spec dd, dl.stack dd { border-top: none; padding-top: 0; padding-bottom: 9px; }
+  dl.spec dt, dl.stack dt { padding-bottom: 2px; }
+  .bg-line .what { border-top: none; padding-top: 0; }
+  .bg-line .year { padding-bottom: 2px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a, button { transition: color .15s ease, border-color .15s ease, background-color .15s ease; }
+}
