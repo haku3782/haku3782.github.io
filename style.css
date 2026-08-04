@@ -264,3 +264,81 @@ html[data-active="ko"] .lang { font-family: var(--body); letter-spacing: 0.04em;
 @media (prefers-reduced-motion: no-preference) {
   a, button { transition: color .15s ease, border-color .15s ease, background-color .15s ease; }
 }
+
+/* ---------- lightbox ---------- */
+
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(22, 25, 29, 0.92);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lightbox-overlay.active { display: flex; }
+
+.lightbox-dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.lightbox-close:hover { color: #fff; }
+
+.lightbox-stage {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lightbox-img {
+  max-width: 80vw;
+  max-height: 78vh;
+  object-fit: contain;
+  display: block;
+  border-radius: 2px;
+}
+
+.lightbox-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.lightbox-btn:hover:not(:disabled) { border-color: rgba(255,255,255,0.8); }
+.lightbox-btn:disabled { opacity: 0.25; cursor: default; }
+
+.lightbox-counter {
+  color: rgba(255,255,255,0.5);
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
